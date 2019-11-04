@@ -81,10 +81,10 @@ public class HeroesGenerator : MonoBehaviour
         switch (name)
         {
             case "Nocturne":
-                hero.AddComponent<Hero>().StartDefault(10, 2, 2, 2, false);
+                hero.AddComponent<HeroDefault>().StartDefault(10, 2, 2, 2, false);
                 break;
             case "Ashe":
-                hero.AddComponent<Hero>().StartDefault(10, 2, 2, 1, true);
+                hero.AddComponent<HeroDefault>().StartDefault(10, 2, 2, 1, true);
                 break;
         }
     }
