@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Nakupování speciálních předmětů
 public class AppModel : MonoBehaviour
 {
 
