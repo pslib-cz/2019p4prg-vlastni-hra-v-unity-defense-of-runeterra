@@ -43,6 +43,8 @@ public class AppModel : MonoBehaviour
 
         Defeat.SetActive(false);
         Explosion.SetActive(false);
+
+        Actual_Level = 1;
     }
 
     // Update is called once per frame
@@ -51,6 +53,11 @@ public class AppModel : MonoBehaviour
         CheckTurret();
         CheckMoney();
         CheckLevel();
+    }
+
+    public void NextWave()
+    {
+        Actual_Level += 1;
     }
 
     private void CheckTurret()
