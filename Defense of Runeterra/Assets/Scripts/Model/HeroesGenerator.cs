@@ -9,10 +9,13 @@ public class HeroesGenerator : MonoBehaviour
 
     public List<GameObject> Heroes;
     public float SpawningPeriod;
+    public float WaveCount;
 
     private GameObject _heroesEmpty;
     private System.Random index;
     private float _spawningPeriod;
+    private float _waveCount;
+    private float _mobsReleased;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class HeroesGenerator : MonoBehaviour
 
         index = new System.Random();
 
+        _waveCount = -1f;
         _spawningPeriod = -1f;
     }
 
@@ -43,11 +47,30 @@ public class HeroesGenerator : MonoBehaviour
                 InvokeRepeating(nameof(generateNewRandomHero), 1.5f, _spawningPeriod);
         }
 
-        if (!IsInvoking(nameof(generateNewRandomHero)) && _spawningPeriod != -1f)
+        if (_waveCount != WaveCount) //New level is set up
         {
-            _spawningPeriod = SpawningPeriod;
-            InvokeRepeating(nameof(generateNewRandomHero), 1.5f, _spawningPeriod);
+            _mobsReleased = 0;
+            _waveCount = WaveCount;
         }
+
+        if(_mobsReleased == _waveCount)
+        {
+            if (IsInvoking(nameof(generateNewRandomHero)))
+            {
+                CancelInvoke(nameof(generateNewRandomHero));
+            }
+        }
+        else
+        {
+            if (!IsInvoking(nameof(generateNewRandomHero)) && _spawningPeriod != -1f)
+            {
+                _spawningPeriod = SpawningPeriod;
+                InvokeRepeating(nameof(generateNewRandomHero), 1.5f, _spawningPeriod);
+            }
+        }
+
+
+        
     }
 
     private void generateNewRandomHero()
@@ -85,6 +108,8 @@ public class HeroesGenerator : MonoBehaviour
 
     private void heroInit(GameObject hero)
     {
+        _mobsReleased += 1;
+
         //Split name by uppercase so we can just access hero name
         string[] split = Regex.Split(hero.name, @"(?<!^)(?=[A-Z])");
         name = split[0];

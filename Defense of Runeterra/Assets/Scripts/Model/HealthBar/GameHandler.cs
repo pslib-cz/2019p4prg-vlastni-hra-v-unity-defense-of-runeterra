@@ -26,9 +26,14 @@ public class GameHandler : MonoBehaviour {
  
     void Update()   
     {
-        
-        ActualHP = _playerControlModel.TurretActualHP;
-        MaxHP = _playerControlModel.TurretMaxHP;
+        if(ActualHP != _playerControlModel.TurretActualHP)
+        {
+            ActualHP = _playerControlModel.TurretActualHP;
+        }
+        if (MaxHP != _playerControlModel.TurretMaxHP)
+        {
+            MaxHP = _playerControlModel.TurretMaxHP;
+        }
         if (ActualHP >= 0)
         {
             health = (ActualHP / (MaxHP / 100)) / 100;

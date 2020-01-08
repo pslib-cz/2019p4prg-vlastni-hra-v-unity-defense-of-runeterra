@@ -110,17 +110,24 @@ namespace Assets.Scripts.Heroes.Abstract
                 if (script.TurretActualHP > 0)
                 {
                     script.TurretActualHP -= AD;
+                    if (script.TurretActualHP < 0)
+                    {
+                        script.TurretActualHP = 0;
+                    }
                 }
             }
             else
             {
-                if ((script.TurretActualHP - AD) > script.TurretMaxHP)
+                if (script.TurretActualHP > 0)
                 {
-                    script.TurretActualHP = script.TurretMaxHP;
-                }
-                else
-                {
-                    script.TurretActualHP -= AD;
+                    if ((script.TurretActualHP - AD) > script.TurretMaxHP)
+                    {
+                        script.TurretActualHP = script.TurretMaxHP;
+                    }
+                    else
+                    {
+                        script.TurretActualHP -= AD;
+                    }
                 }
             }
         }

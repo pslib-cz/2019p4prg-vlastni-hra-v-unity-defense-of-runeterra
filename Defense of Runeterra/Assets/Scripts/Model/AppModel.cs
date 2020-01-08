@@ -12,6 +12,7 @@ public class AppModel : MonoBehaviour
     public GameObject Explosion;
     public Text HPText;
     public Text MoneyText;
+    public Text LevelText;
 
     private Camera _turret;
     private SpriteRenderer _renderer;
@@ -31,7 +32,7 @@ public class AppModel : MonoBehaviour
         _heroesGenerator = _turret.GetComponent<HeroesGenerator>();
         _turretHP = _playerControlModel.TurretActualHP;
         _turretMaxHP = _playerControlModel.TurretMaxHP;
-        _actualLevel = Actual_Level;
+        _actualLevel = 0;
 
         HPText.text = $"{_turretHP}/{_turretMaxHP}";
 
@@ -42,8 +43,6 @@ public class AppModel : MonoBehaviour
 
         Defeat.SetActive(false);
         Explosion.SetActive(false);
-
-        Actual_Level = 1;
     }
 
     // Update is called once per frame
@@ -91,10 +90,12 @@ public class AppModel : MonoBehaviour
         if (_actualLevel != Actual_Level)
         {
             _actualLevel = Actual_Level;
+            LevelText.text = $"Level: {_actualLevel.ToString()}";
 
             switch (_actualLevel)
             {
                 case 1f:
+                    _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 5.0f;
                     break;
                 case 2f:
