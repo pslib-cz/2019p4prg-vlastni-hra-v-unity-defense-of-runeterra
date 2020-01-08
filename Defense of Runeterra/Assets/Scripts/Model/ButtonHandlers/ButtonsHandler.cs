@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ButtonsHandler : MonoBehaviour
 {
-    public float DMGCost = 5;
-    public float ASCost = 5;
-    public float MSCost = 5;
-    public float HPCost = 5;
+    public float DMGCost = 3;
+    public float ASCost = 3;
+    public float MSCost = 3;
+    public float HPCost = 3;
 
     public Text DMGCostText;
     public Text ASCostText;
@@ -36,7 +36,7 @@ public class ButtonsHandler : MonoBehaviour
         if (CheckMoney(DMGCost))
         {
             _playerControl.BulletDamage += 1f;
-            DMGCost += 5;
+            DMGCost = DMGCost * 2;
             DMGCostText.text = $"Cost: {DMGCost}";
         }
     }
@@ -45,7 +45,7 @@ public class ButtonsHandler : MonoBehaviour
         if (CheckMoney(ASCost))
         {
             _playerControl.ShootCooldown -= 0.1f;
-            ASCost += 5;
+            ASCost = ASCost * 2;
             ASCostText.text = $"Cost: {ASCost}";
         }
     }
@@ -54,7 +54,7 @@ public class ButtonsHandler : MonoBehaviour
         if (CheckMoney(MSCost))
         {
             _playerControl.BulletSpeed += 0.5f;
-            MSCost += 5;
+            MSCost = MSCost * 2;
             MSCostText.text = $"Cost: {MSCost}";
         }
     }
@@ -64,7 +64,7 @@ public class ButtonsHandler : MonoBehaviour
         {
             _playerControl.TurretActualHP += 5f;
             _playerControl.TurretMaxHP += 5f;
-            HPCost += 5;
+            HPCost = HPCost * 2;
             HPCostText.text = $"Cost: {HPCost}";
         }
     }

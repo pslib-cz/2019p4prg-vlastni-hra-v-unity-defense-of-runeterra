@@ -11,6 +11,8 @@ public class HeroesGenerator : MonoBehaviour
     public float SpawningPeriod;
     public float WaveCount;
 
+    private Camera _turret;
+    private AppModel _appModel;
     private GameObject _heroesEmpty;
     private System.Random index;
     private float _spawningPeriod;
@@ -27,6 +29,9 @@ public class HeroesGenerator : MonoBehaviour
             hero.GetComponent<SpriteRenderer>().sortingOrder = 2;
             hero.tag = "Hero";
         }
+
+        _turret = Camera.main;
+        _appModel = _turret.GetComponent<AppModel>();
 
         _heroesEmpty = GameObject.Find("Heroes");
 
@@ -113,14 +118,15 @@ public class HeroesGenerator : MonoBehaviour
         //Split name by uppercase so we can just access hero name
         string[] split = Regex.Split(hero.name, @"(?<!^)(?=[A-Z])");
         name = split[0];
+        var actual_level = _appModel.Actual_Level;
 
         switch (name)
         {
             case "Nocturne":
-                hero.AddComponent<Hero>().StartDefault(10, 2, 2, 2, false, 10);
+                hero.AddComponent<Hero>().StartDefault(10 * actual_level, 2 * actual_level, 2 * actual_level, 2, false, 10 * actual_level);
                 break;
             case "Ashe":
-                hero.AddComponent<Hero>().StartDefault(10, 2, 3, 1, true, 10);
+                hero.AddComponent<Hero>().StartDefault(10 * actual_level, 2, 3, 1, true, 10);
                 break;
             case "Karthus":
                 hero.AddComponent<Hero>().StartDefault(8, 5, 2, 1, true, 10);

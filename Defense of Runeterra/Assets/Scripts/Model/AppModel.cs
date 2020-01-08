@@ -106,15 +106,19 @@ public class AppModel : MonoBehaviour
                     _heroesGenerator.SpawningPeriod = 5.0f;
                     break;
                 case 2f:
+                    _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 4.0f;
                     break;
                 case 3f:
+                    _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 3.0f;
                     break;
                 case 4f:
+                    _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 2.0f;
                     break;
                 case 5f:
+                    _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 1.0f;
                     break;
             }
