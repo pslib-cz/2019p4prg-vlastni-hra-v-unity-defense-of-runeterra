@@ -24,11 +24,11 @@ namespace Assets.Scripts.Heroes.Abstract
         [ExposeProperty]
         public float WorthOf { get; set; }
 
-        private Transform _transform;
-        private Rigidbody2D _rigidbody;
-        private Camera _turret;
-        private AppModel _appModel;
-        private PlayerControlModel _playerControlModel;
+        protected Transform _transform;
+        protected Rigidbody2D _rigidbody;
+        protected Camera _turret;
+        protected AppModel _appModel;
+        protected PlayerControlModel _playerControlModel;
         
 
         public void StartDefault(float _ad, 
@@ -57,7 +57,7 @@ namespace Assets.Scripts.Heroes.Abstract
 
         protected void UpdateDefault()
         {
-
+            
             if (Ranged)
             {
                 if (_transform.position.x > -2.0f && _transform.position.x < -1.0f)
