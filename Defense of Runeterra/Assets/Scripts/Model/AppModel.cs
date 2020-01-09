@@ -14,6 +14,9 @@ public class AppModel : MonoBehaviour
     public Text HPText;
     public Text MoneyText;
     public Text LevelText;
+    public Text ArmorText;
+    public GameObject NextWaveButton;
+    public Text NextWaveButtonText;
 
     
     private Camera _turret;
@@ -25,6 +28,7 @@ public class AppModel : MonoBehaviour
     private float _turretMaxHP;
     private float _actualMoney;
     private float _actualLevel;
+    private float _actualArmor;
     private PlayerControlModel _playerControlModel;
     private HeroesGenerator _heroesGenerator;
 
@@ -40,6 +44,8 @@ public class AppModel : MonoBehaviour
     
 
         HPText.text = $"{_turretHP}/{_turretMaxHP}";
+        NextWaveButtonText.text = "Begin game";
+
 
         _renderer = Defeat.GetComponent<SpriteRenderer>();
         _turretRend = TowerSprite.GetComponent<SpriteRenderer>();
@@ -50,8 +56,6 @@ public class AppModel : MonoBehaviour
 
         Defeat.SetActive(false);
         Explosion.SetActive(false);
-
-        Actual_Level = 1;
     }
 
     // Update is called once per frame
@@ -61,11 +65,6 @@ public class AppModel : MonoBehaviour
         CheckMoney();
         CheckLevel();
       
-    }
-
-    public void NextWave()
-    {
-        Actual_Level += 1;
     }
 
     private void RedColor()
@@ -102,6 +101,11 @@ public class AppModel : MonoBehaviour
             var hp = _playerControlModel.TurretMaxHP;
             HPText.text = $"{_turretHP}/{hp}";
         }
+        if(_actualArmor != _playerControlModel.TurretArmor)
+        {
+            _actualArmor = _playerControlModel.TurretArmor;
+            ArmorText.text = $"Armor : {_actualArmor}";
+        }
     }
 
     private void CheckMoney()
@@ -124,27 +128,27 @@ public class AppModel : MonoBehaviour
             {
                 case 1f:
                     _heroesGenerator.KillValue = 1;
-                    _heroesGenerator.WaveCount = 2f;
+                    _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 5.0f;
                     break;
                 case 2f:
                     _heroesGenerator.KillValue = 2;
-                    _heroesGenerator.WaveCount = 10f;
+                    _heroesGenerator.WaveCount = 14f;
                     _heroesGenerator.SpawningPeriod = 4.0f;
                     break;
                 case 3f:
                     _heroesGenerator.KillValue = 3;
-                    _heroesGenerator.WaveCount = 10f;
+                    _heroesGenerator.WaveCount = 18f;
                     _heroesGenerator.SpawningPeriod = 3.0f;
                     break;
                 case 4f:
                     _heroesGenerator.KillValue = 4;
-                    _heroesGenerator.WaveCount = 10f;
+                    _heroesGenerator.WaveCount = 22f;
                     _heroesGenerator.SpawningPeriod = 2.0f;
                     break;
                 case 5f:
                     _heroesGenerator.KillValue = 5;
-                    _heroesGenerator.WaveCount = 10f;
+                    _heroesGenerator.WaveCount = 26f;
                     _heroesGenerator.SpawningPeriod = 1.0f;
                     break;
             }

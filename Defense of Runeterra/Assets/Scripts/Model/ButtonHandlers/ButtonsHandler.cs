@@ -35,7 +35,7 @@ public class ButtonsHandler : MonoBehaviour
     {
         if (CheckMoney(DMGCost))
         {
-            _playerControl.BulletDamage += 1f;
+            _playerControl.BulletDamage += 0.6f;
             DMGCost = DMGCost * 2;
             DMGCostText.text = $"Cost: {DMGCost}";
         }
@@ -49,11 +49,11 @@ public class ButtonsHandler : MonoBehaviour
             ASCostText.text = $"Cost: {ASCost}";
         }
     }
-    public void IncMS()
+    public void IncArmor()
     {
         if (CheckMoney(MSCost))
         {
-            _playerControl.BulletSpeed += 0.5f;
+            _playerControl.TurretArmor += 1.5f;
             MSCost = MSCost * 2;
             MSCostText.text = $"Cost: {MSCost}";
         }
@@ -67,6 +67,16 @@ public class ButtonsHandler : MonoBehaviour
             HPCost = HPCost * 2;
             HPCostText.text = $"Cost: {HPCost}";
         }
+    }
+    public void NextWave()
+    {
+        if(_appModel.NextWaveButtonText.text == "Begin game")
+        {
+            _appModel.NextWaveButtonText.text = "Next wave!";
+        }
+        _appModel.NextWaveButton.SetActive(false);
+
+        _appModel.Actual_Level += 1;
     }
 
     private bool CheckMoney(float cost)

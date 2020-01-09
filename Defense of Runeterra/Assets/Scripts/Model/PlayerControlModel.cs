@@ -13,6 +13,7 @@ public class PlayerControlModel : MonoBehaviour
     public float BulletDamage = 1;
     public float TurretMaxHP = 50;
     public float TurretActualHP = 50;
+    public float TurretArmor = 0;
 
     private Vector3 _target;
     private float _shooting_cd;
@@ -30,6 +31,7 @@ public class PlayerControlModel : MonoBehaviour
         BulletDamage = 1;
         TurretMaxHP = 50;
         TurretActualHP = 50;
+        TurretArmor = 0;
 
     Cursor.visible = false;
         _shooting_cd = Time.time + ShootCooldown;
