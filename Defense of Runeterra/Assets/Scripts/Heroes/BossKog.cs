@@ -22,6 +22,7 @@ namespace Assets.Scripts.Heroes
         // Update is called once per frame
         void Update()
         {
+
             if (_rigidbody.velocity == Vector2.left * MS)
             {
                 _rigidbody.velocity = new Vector2(-0.5f, 1) * MS;

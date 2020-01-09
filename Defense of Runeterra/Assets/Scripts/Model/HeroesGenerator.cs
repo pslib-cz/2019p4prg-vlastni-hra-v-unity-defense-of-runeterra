@@ -143,11 +143,12 @@ public class HeroesGenerator : MonoBehaviour
         //Split name by uppercase so we can just access hero name
         string[] split = Regex.Split(hero.name, @"(?<!^)(?=[A-Z])");
         name = split[0];
-        var actual_level = _appModel.Actual_Level / 2;
-        if (_isBoss == true)
+        var actual_level = _appModel.Actual_Level / 3;
+        if(_isBoss ==true)
         {
-            name = "Kog";
+            actual_level = _appModel.Actual_Level / 2;
         }
+        
         switch (name)
         {
             case "Nocturne":
@@ -160,10 +161,10 @@ public class HeroesGenerator : MonoBehaviour
                 hero.AddComponent<Hero>().StartDefault(2 * actual_level, 6 * actual_level, 0.3f / actual_level, 1, true);
                 break;
             case "Taric":
-                hero.AddComponent<Hero>().StartDefault(2 * actual_level, 12 * actual_level, 1.3f / actual_level, 0.5f, false);
+                hero.AddComponent<Hero>().StartDefault(2 * actual_level, 12 * actual_level , 1.3f / actual_level, 0.5f, false);
                 break;
             case "Teemo":
-                hero.AddComponent<Hero>().StartDefault(6 * actual_level, 5 * actual_level, 0.6f / actual_level, 0.7f, true); //Easter-EGG
+                hero.AddComponent<Hero>().StartDefault(6 * actual_level, 5 * actual_level , 0.6f / actual_level, 0.7f, true); //Easter-EGG
                 break;
             case "Cho":
                 hero.AddComponent<Hero>().StartDefault(7 * actual_level, 9 * actual_level, 1.2f / actual_level, 1, false);
@@ -172,7 +173,7 @@ public class HeroesGenerator : MonoBehaviour
                 hero.AddComponent<Hero>().StartDefault(3 * actual_level, 8 * actual_level, 0.9f / actual_level, 1.3f, false);
                 break;
             case "Kog":
-                hero.AddComponent<BossKog>().StartDefault(4 * actual_level, 27 * actual_level, 1f / actual_level, 2.5f, true);
+                hero.AddComponent<BossKog>().StartDefault(4 * actual_level, 4 * actual_level, 1f / actual_level, 2.5f, true);
                 break;
         }
     }

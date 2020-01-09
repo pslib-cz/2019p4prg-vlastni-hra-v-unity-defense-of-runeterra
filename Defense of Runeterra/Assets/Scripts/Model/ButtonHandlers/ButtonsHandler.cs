@@ -35,7 +35,7 @@ public class ButtonsHandler : MonoBehaviour
     {
         if (CheckMoney(DMGCost))
         {
-            _playerControl.BulletDamage += 0.6f;
+            _playerControl.BulletDamage += 0.8f;
             DMGCost = DMGCost * 2;
             DMGCostText.text = $"Cost: {DMGCost}";
         }
@@ -44,7 +44,7 @@ public class ButtonsHandler : MonoBehaviour
     {
         if (CheckMoney(ASCost))
         {
-            _playerControl.ShootCooldown -= 0.1f;
+            _playerControl.ShootCooldown -= 0.15f;
             ASCost = ASCost * 2;
             ASCostText.text = $"Cost: {ASCost}";
         }
@@ -62,8 +62,8 @@ public class ButtonsHandler : MonoBehaviour
     {
         if (CheckMoney(HPCost))
         {
-            _playerControl.TurretActualHP += 5f;
-            _playerControl.TurretMaxHP += 5f;
+            _playerControl.TurretActualHP += 10f;
+            _playerControl.TurretMaxHP += 10f;
             HPCost = HPCost * 2;
             HPCostText.text = $"Cost: {HPCost}";
         }
