@@ -28,11 +28,12 @@ namespace Assets.Scripts.Heroes.Abstract
         protected AppModel _appModel;
         protected PlayerControlModel _playerControlModel;
         protected HeroesGenerator _heroesGenerator;
-        
+        protected bool _isLast;
+        protected GameObject _heroes;
 
-        public void StartDefault(float _ad, 
-                                    float _hp, 
-                                    float _as, 
+        public void StartDefault(float _ad,
+                                    float _hp,
+                                    float _as,
                                     float _ms,
                                     bool _ranged,
                                     bool _attacking = false)
@@ -50,6 +51,8 @@ namespace Assets.Scripts.Heroes.Abstract
             _playerControlModel = _turret.GetComponent<PlayerControlModel>();
             _appModel = _turret.GetComponent<AppModel>();
             _heroesGenerator = _turret.GetComponent<HeroesGenerator>();
+            _isLast = _heroesGenerator.MobsReleased == _heroesGenerator.WaveCount - 1 ? true : false;
+            _heroes = GameObject.Find("Heroes");
         }
 
         protected void UpdateDefault()
@@ -93,8 +96,15 @@ namespace Assets.Scripts.Heroes.Abstract
                 Destroy(collider.gameObject);
                 if (HP <= 0)
                 {
-                    _appModel.Actual_Money += _heroesGenerator.KillValue;
                     Destroy(gameObject);
+
+                    if (_heroes.transform.childCount == 1 && (_heroesGenerator.MobsReleased == _heroesGenerator.WaveCount))
+                    {
+                        _playerControlModel.TurretActualHP = _playerControlModel.TurretMaxHP;
+                        _appModel.Actual_Money += (_appModel.Actual_Level / 3) * 100;
+                        _appModel.NextWaveButton.SetActive(true);
+                    }
+                    _appModel.Actual_Money += _heroesGenerator.KillValue;
                 }
             } 
         }
@@ -106,7 +116,15 @@ namespace Assets.Scripts.Heroes.Abstract
             {
                 if (script.TurretActualHP > 0)
                 {
-                    script.TurretActualHP -= AD;
+                    if  (AD - script.TurretArmor > 0)
+                    {
+                        script.TurretActualHP -= AD - script.TurretArmor;
+                    }
+                    else
+                    {
+                        script.TurretActualHP -= 0.5f;
+                    }
+                    
                     if (script.TurretActualHP < 0)
                     {
                         script.TurretActualHP = 0;
@@ -123,7 +141,7 @@ namespace Assets.Scripts.Heroes.Abstract
                     }
                     else
                     {
-                        script.TurretActualHP -= AD;
+                        script.TurretActualHP -= AD - script.TurretArmor;
                     }
                 }
             }
