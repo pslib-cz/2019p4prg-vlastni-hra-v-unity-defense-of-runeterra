@@ -102,22 +102,27 @@ public class AppModel : MonoBehaviour
             switch (_actualLevel)
             {
                 case 1f:
-                    _heroesGenerator.WaveCount = 10f;
+                    _heroesGenerator.KillValue = 1;
+                    _heroesGenerator.WaveCount = 2f;
                     _heroesGenerator.SpawningPeriod = 5.0f;
                     break;
                 case 2f:
+                    _heroesGenerator.KillValue = 2;
                     _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 4.0f;
                     break;
                 case 3f:
+                    _heroesGenerator.KillValue = 3;
                     _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 3.0f;
                     break;
                 case 4f:
+                    _heroesGenerator.KillValue = 4;
                     _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 2.0f;
                     break;
                 case 5f:
+                    _heroesGenerator.KillValue = 5;
                     _heroesGenerator.WaveCount = 10f;
                     _heroesGenerator.SpawningPeriod = 1.0f;
                     break;

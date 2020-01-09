@@ -10,14 +10,18 @@ public class HeroesGenerator : MonoBehaviour
     public List<GameObject> Heroes;
     public float SpawningPeriod;
     public float WaveCount;
+    public float KillValue;
+    public float MobsReleased;
 
     private Camera _turret;
     private AppModel _appModel;
+    private PlayerControlModel _playerControlModel;
     private GameObject _heroesEmpty;
     private System.Random index;
     private float _spawningPeriod;
     private float _waveCount;
     private float _mobsReleased;
+    private float _killValue;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,7 @@ public class HeroesGenerator : MonoBehaviour
 
         _turret = Camera.main;
         _appModel = _turret.GetComponent<AppModel>();
+        _playerControlModel = _turret.GetComponent<PlayerControlModel>();
 
         _heroesEmpty = GameObject.Find("Heroes");
 
@@ -39,6 +44,7 @@ public class HeroesGenerator : MonoBehaviour
 
         _waveCount = -1f;
         _spawningPeriod = -1f;
+        _killValue = -1f;
     }
 
     // Update is called once per frame
@@ -58,6 +64,11 @@ public class HeroesGenerator : MonoBehaviour
             _waveCount = WaveCount;
         }
 
+        if (_mobsReleased != MobsReleased)
+        {
+            MobsReleased = _mobsReleased;
+        }
+
         if(_mobsReleased == _waveCount)
         {
             if (IsInvoking(nameof(generateNewRandomHero)))
@@ -74,7 +85,10 @@ public class HeroesGenerator : MonoBehaviour
             }
         }
 
-
+        if(_killValue != KillValue)
+        {
+            _killValue = KillValue;
+        }
         
     }
 
@@ -118,30 +132,30 @@ public class HeroesGenerator : MonoBehaviour
         //Split name by uppercase so we can just access hero name
         string[] split = Regex.Split(hero.name, @"(?<!^)(?=[A-Z])");
         name = split[0];
-        var actual_level = _appModel.Actual_Level;
+        var actual_level = _appModel.Actual_Level / 2;
 
         switch (name)
         {
             case "Nocturne":
-                hero.AddComponent<Hero>().StartDefault(10 * actual_level, 2 * actual_level, 2 * actual_level, 2, false, 10 * actual_level);
+                hero.AddComponent<Hero>().StartDefault(9 * actual_level, 4 * actual_level, 0.9f / actual_level, 2, false);
                 break;
             case "Ashe":
-                hero.AddComponent<Hero>().StartDefault(10 * actual_level, 2, 3, 1, true, 10);
+                hero.AddComponent<Hero>().StartDefault(8 * actual_level, 6 * actual_level, 1.2f / actual_level, 1, true);
                 break;
             case "Karthus":
-                hero.AddComponent<Hero>().StartDefault(8, 5, 2, 1, true, 10);
+                hero.AddComponent<Hero>().StartDefault(2 * actual_level, 6 * actual_level, 0.3f / actual_level, 1, true);
                 break;
             case "Taric":
-                hero.AddComponent<Hero>().StartDefault(-1, 12, 3, 0.5f, false, 10);
+                hero.AddComponent<Hero>().StartDefault(2 * actual_level, 12 * actual_level, 1.3f / actual_level, 0.5f, false);
                 break;
             case "Teemo":
-                hero.AddComponent<Hero>().StartDefault(6, 6, 6, 0.7f, true, 10); //Easter-EGG
+                hero.AddComponent<Hero>().StartDefault(6 * actual_level, 5 * actual_level, 0.6f / actual_level, 0.7f, true); //Easter-EGG
                 break;
             case "Cho":
-                hero.AddComponent<Hero>().StartDefault(4, 8, 2, 1, false, 10);
+                hero.AddComponent<Hero>().StartDefault(7 * actual_level, 9 * actual_level, 1.2f / actual_level, 1, false);
                 break;
             case "Alistar":
-                hero.AddComponent<Hero>().StartDefault(4, 5, 1.4f, 1.3f, false, 10);
+                hero.AddComponent<Hero>().StartDefault(3 * actual_level, 8 * actual_level, 0.9f / actual_level, 1.3f, false);
                 break;
         }
     }

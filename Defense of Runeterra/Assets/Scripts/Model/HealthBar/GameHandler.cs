@@ -36,6 +36,7 @@ public class GameHandler : MonoBehaviour {
         }
         if (ActualHP >= 0)
         {
+            ActualHP = _playerControlModel.TurretActualHP;
             health = (ActualHP / (MaxHP / 100)) / 100;
             healthBar.SetSize(health);
         }

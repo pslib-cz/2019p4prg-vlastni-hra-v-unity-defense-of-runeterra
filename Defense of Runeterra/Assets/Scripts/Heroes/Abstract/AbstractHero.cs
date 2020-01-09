@@ -21,14 +21,13 @@ namespace Assets.Scripts.Heroes.Abstract
         public bool Ranged { get; set; }
         [ExposeProperty]
         public bool Attacking { get; set; }
-        [ExposeProperty]
-        public float WorthOf { get; set; }
 
         private Transform _transform;
         private Rigidbody2D _rigidbody;
         private Camera _turret;
         private AppModel _appModel;
         private PlayerControlModel _playerControlModel;
+        private HeroesGenerator _heroesGenerator;
         
 
         public void StartDefault(float _ad, 
@@ -36,7 +35,6 @@ namespace Assets.Scripts.Heroes.Abstract
                                     float _as, 
                                     float _ms,
                                     bool _ranged,
-                                    float _worthOf,
                                     bool _attacking = false)
         {
             AD = _ad;
@@ -44,7 +42,6 @@ namespace Assets.Scripts.Heroes.Abstract
             AS = _as;
             MS = _ms;
             Ranged = _ranged;
-            WorthOf = _worthOf;
             Attacking = _attacking;
             _transform = GetComponent<Transform>();
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -52,7 +49,7 @@ namespace Assets.Scripts.Heroes.Abstract
             _turret = Camera.main;
             _playerControlModel = _turret.GetComponent<PlayerControlModel>();
             _appModel = _turret.GetComponent<AppModel>();
-
+            _heroesGenerator = _turret.GetComponent<HeroesGenerator>();
         }
 
         protected void UpdateDefault()
@@ -96,7 +93,7 @@ namespace Assets.Scripts.Heroes.Abstract
                 Destroy(collider.gameObject);
                 if (HP <= 0)
                 {
-                    _appModel.Actual_Money += WorthOf;
+                    _appModel.Actual_Money += _heroesGenerator.KillValue;
                     Destroy(gameObject);
                 }
             } 

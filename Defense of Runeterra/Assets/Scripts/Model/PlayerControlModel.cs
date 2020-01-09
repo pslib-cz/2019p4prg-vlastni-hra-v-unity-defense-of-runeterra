@@ -8,7 +8,7 @@ public class PlayerControlModel : MonoBehaviour
     public GameObject Crosshair;
     public GameObject Bullet;
 
-    public float BulletSpeed = 10.0f;
+    public float BulletSpeed = 4.0f;
     public float ShootCooldown = 2;
     public float BulletDamage = 1;
     public float TurretMaxHP = 50;
@@ -18,13 +18,20 @@ public class PlayerControlModel : MonoBehaviour
     private float _shooting_cd;
     private Vector2 _turret_position;
     private Camera _camera;
+    private float _turretActualHP;
 
     private float _destroy_time = 2.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        BulletSpeed = 8.0f;
+        ShootCooldown = 1.5f;
+        BulletDamage = 1;
+        TurretMaxHP = 50;
+        TurretActualHP = 50;
+
+    Cursor.visible = false;
         _shooting_cd = Time.time + ShootCooldown;
         _turret_position = new Vector2(-4.9f, 1.9f);
         _camera = transform.GetComponent<Camera>();
@@ -34,6 +41,15 @@ public class PlayerControlModel : MonoBehaviour
     void Update()
     {
         check_crosshair();
+        checkHP();
+    }
+
+    private void checkHP()
+    {
+        if (_turretActualHP != TurretActualHP)
+        {
+            _turretActualHP = TurretActualHP;
+        }
     }
 
     private void check_crosshair()
