@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Assets.Scripts.Heroes;
 using UnityEngine;
 
 public class HeroesGenerator : MonoBehaviour
@@ -13,6 +14,7 @@ public class HeroesGenerator : MonoBehaviour
     public float KillValue;
     public float MobsReleased;
 
+    private bool _isBoss;
     private Camera _turret;
     private AppModel _appModel;
     private PlayerControlModel _playerControlModel;
@@ -42,6 +44,7 @@ public class HeroesGenerator : MonoBehaviour
 
         index = new System.Random();
 
+        _isBoss = false;
         _waveCount = -1f;
         _spawningPeriod = -1f;
         _killValue = -1f;
@@ -67,6 +70,14 @@ public class HeroesGenerator : MonoBehaviour
         if (_mobsReleased != MobsReleased)
         {
             MobsReleased = _mobsReleased;
+            if ((_mobsReleased + 1) == _waveCount)
+            {
+                _isBoss = true;
+            }
+            else
+            {
+                _isBoss = false;
+            }
         }
 
         if(_mobsReleased == _waveCount)
@@ -133,7 +144,10 @@ public class HeroesGenerator : MonoBehaviour
         string[] split = Regex.Split(hero.name, @"(?<!^)(?=[A-Z])");
         name = split[0];
         var actual_level = _appModel.Actual_Level / 2;
-
+        if (_isBoss == true)
+        {
+            name = "Kog";
+        }
         switch (name)
         {
             case "Nocturne":
@@ -156,6 +170,9 @@ public class HeroesGenerator : MonoBehaviour
                 break;
             case "Alistar":
                 hero.AddComponent<Hero>().StartDefault(3 * actual_level, 8 * actual_level, 0.9f / actual_level, 1.3f, false);
+                break;
+            case "Kog":
+                hero.AddComponent<BossKog>().StartDefault(4 * actual_level, 27 * actual_level, 1f / actual_level, 2.5f, true);
                 break;
         }
     }

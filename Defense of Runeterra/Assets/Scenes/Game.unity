@@ -796,8 +796,11 @@ MonoBehaviour:
   - {fileID: 750371325587107724, guid: c738875b59e029b4c8360b8a68b6ce3f, type: 3}
   - {fileID: 3563610621739354012, guid: e026128635887204aa6156d0fe1e6a81, type: 3}
   - {fileID: 7230247579489077936, guid: 1da44a1a91cc7df4fbe8333f2696c57e, type: 3}
+  - {fileID: 8489327620438468400, guid: 96fbdc5c396a0994db7bdbbafa21a0e4, type: 3}
   SpawningPeriod: -1
   WaveCount: 0
+  KillValue: 0
+  MobsReleased: 0
 --- !u!114 &645924325
 MonoBehaviour:
   m_ObjectHideFlags: 0
