@@ -9,14 +9,18 @@ public class AppModel : MonoBehaviour
     public float Actual_Level = 0;
     public float Actual_Money = 0;
     public GameObject Defeat;
+    public GameObject TowerSprite;
     public GameObject Explosion;
     public Text HPText;
     public Text MoneyText;
     public Text LevelText;
 
+    
     private Camera _turret;
     private SpriteRenderer _renderer;
+    private SpriteRenderer _turretRend;
     private Color _alphaColor;
+   
     private float _turretHP;
     private float _turretMaxHP;
     private float _actualMoney;
@@ -33,11 +37,14 @@ public class AppModel : MonoBehaviour
         _turretHP = _playerControlModel.TurretActualHP;
         _turretMaxHP = _playerControlModel.TurretMaxHP;
         _actualLevel = 0;
+    
 
         HPText.text = $"{_turretHP}/{_turretMaxHP}";
 
         _renderer = Defeat.GetComponent<SpriteRenderer>();
+        _turretRend = TowerSprite.GetComponent<SpriteRenderer>();
 
+       
         _alphaColor = _renderer.material.color;
         _alphaColor.a = 0;
 
@@ -53,6 +60,7 @@ public class AppModel : MonoBehaviour
         CheckTurret();
         CheckMoney();
         CheckLevel();
+      
     }
 
     public void NextWave()
@@ -60,6 +68,18 @@ public class AppModel : MonoBehaviour
         Actual_Level += 1;
     }
 
+    private void RedColor()
+    {
+        _turretRend.color = new Color(1, 0, 0);
+        InvokeRepeating(nameof(BackColor), 0.2f, 1f);
+        
+        
+    }
+    private void BackColor()
+    {
+        _turretRend.color = new Color(1, 1, 1, 1);
+        CancelInvoke(nameof(BackColor));
+    }
     private void CheckTurret()
     {
         if (_playerControlModel.TurretActualHP <= 0 && Explosion.activeSelf == false)
@@ -74,6 +94,7 @@ public class AppModel : MonoBehaviour
             _turretHP = _playerControlModel.TurretActualHP;
             var hp = _turretHP;
             HPText.text = $"{hp}/{_turretMaxHP}";
+            RedColor();
         }
         if (_turretMaxHP != _playerControlModel.TurretMaxHP)
         { //Check max HP

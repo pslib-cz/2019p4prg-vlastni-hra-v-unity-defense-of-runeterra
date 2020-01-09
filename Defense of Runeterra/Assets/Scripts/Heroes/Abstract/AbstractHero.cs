@@ -22,12 +22,12 @@ namespace Assets.Scripts.Heroes.Abstract
         [ExposeProperty]
         public bool Attacking { get; set; }
 
-        private Transform _transform;
-        private Rigidbody2D _rigidbody;
-        private Camera _turret;
-        private AppModel _appModel;
-        private PlayerControlModel _playerControlModel;
-        private HeroesGenerator _heroesGenerator;
+        protected Transform _transform;
+        protected Rigidbody2D _rigidbody;
+        protected Camera _turret;
+        protected AppModel _appModel;
+        protected PlayerControlModel _playerControlModel;
+        protected HeroesGenerator _heroesGenerator;
         
 
         public void StartDefault(float _ad, 

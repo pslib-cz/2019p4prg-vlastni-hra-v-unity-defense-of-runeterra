@@ -813,6 +813,7 @@ MonoBehaviour:
   Actual_Level: 0
   Actual_Money: 0
   Defeat: {fileID: 954462157}
+  TowerSprite: {fileID: 1151843931}
   Explosion: {fileID: 1668235519}
   HPText: {fileID: 1019104959}
   MoneyText: {fileID: 738330905}
