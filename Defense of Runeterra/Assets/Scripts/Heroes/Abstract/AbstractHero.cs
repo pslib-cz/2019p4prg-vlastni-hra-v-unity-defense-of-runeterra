@@ -120,6 +120,10 @@ namespace Assets.Scripts.Heroes.Abstract
                     {
                         script.TurretActualHP -= AD - script.TurretArmor;
                     }
+                    else
+                    {
+                        script.TurretActualHP -= 0.5f;
+                    }
                     
                     if (script.TurretActualHP < 0)
                     {
