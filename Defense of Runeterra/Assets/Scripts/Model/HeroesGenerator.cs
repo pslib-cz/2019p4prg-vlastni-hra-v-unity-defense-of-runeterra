@@ -143,10 +143,10 @@ public class HeroesGenerator : MonoBehaviour
         //Split name by uppercase so we can just access hero name
         string[] split = Regex.Split(hero.name, @"(?<!^)(?=[A-Z])");
         name = split[0];
-        var actual_level = _appModel.Actual_Level / 3;
+        var actual_level = _appModel.Actual_Level / 2.25f;
         if(_isBoss ==true)
         {
-            actual_level = _appModel.Actual_Level / 2;
+            actual_level = _appModel.Actual_Level / 1.5f;
         }
         
         switch (name)

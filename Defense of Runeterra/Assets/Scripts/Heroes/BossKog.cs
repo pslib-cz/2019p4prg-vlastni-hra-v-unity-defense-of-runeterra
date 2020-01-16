@@ -64,7 +64,11 @@ namespace Assets.Scripts.Heroes
                     if (script.TurretActualHP > 0)
                     {
                         script.TurretActualHP -= AD;
-                        AS += 0.5f;
+                        AS -= 0.1f;
+                        if (AS <= 0)
+                        {
+                            AS = 0.1f;
+                        }
                         if (script.TurretActualHP < 0)
                         {
                             script.TurretActualHP = 0;

@@ -30,7 +30,25 @@ public class ButtonsHandler : MonoBehaviour
         MSCostText.text = $"Cost: {MSCost}";
         HPCostText.text = $"Cost: {HPCost}";
     }
-
+    void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            IncDMG();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            IncAS();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            IncArmor();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            IncHP();
+        }
+    }
     public void IncDMG()
     {
         if (CheckMoney(DMGCost))
@@ -70,7 +88,7 @@ public class ButtonsHandler : MonoBehaviour
     }
     public void NextWave()
     {
-        if(_appModel.NextWaveButtonText.text == "Begin game")
+        if (_appModel.NextWaveButtonText.text == "Begin game")
         {
             _appModel.NextWaveButtonText.text = "Next wave!";
         }
